@@ -33,6 +33,7 @@ python = "^3.9"
 # TODO: Remove these and add your library's requirements
 click = "^7.0"
 minilog = "^2.0"
+pydantic = "*"
 
 [tool.poetry.dev-dependencies]
 
