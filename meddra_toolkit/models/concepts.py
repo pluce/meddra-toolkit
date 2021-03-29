@@ -12,3 +12,16 @@ class MeddraSOC(MeddraConcept):
 
 class MeddraHLGT(MeddraConcept):
     pass
+
+
+class MeddraHLT(MeddraConcept):
+    pass
+
+
+class MeddraPT(MeddraConcept):
+    soc_code: str
+
+
+class MeddraLLT(MeddraConcept):
+    active: bool
+    pt_code: str

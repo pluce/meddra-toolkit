@@ -2,7 +2,14 @@ import os
 from typing import Dict, List, Optional, Type
 
 from meddra_toolkit.asc import read_asc_file
-from meddra_toolkit.models.concepts import MeddraConcept, MeddraHLGT, MeddraSOC
+from meddra_toolkit.models.concepts import (
+    MeddraConcept,
+    MeddraHLGT,
+    MeddraHLT,
+    MeddraLLT,
+    MeddraPT,
+    MeddraSOC,
+)
 
 
 class MeddraData:
@@ -21,6 +28,47 @@ class MeddraData:
             concept=MeddraHLGT,
             columns=["code", "name", "_", "_", "_", "_", "_", "_", "_", "_"],
         )
+        self._load_concept(
+            "hlt.asc",
+            concept=MeddraHLT,
+            columns=["code", "name", "_", "_", "_", "_", "_", "_", "_", "_"],
+        )
+        self._load_concept(
+            "pt.asc",
+            concept=MeddraPT,
+            columns=[
+                "code",
+                "name",
+                "_",
+                "soc_code",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+            ],
+        )
+        self._load_concept(
+            "llt.asc",
+            concept=MeddraLLT,
+            columns=[
+                "code",
+                "name",
+                "pt_code",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+                "_",
+                "active",
+                "_",
+                "_",
+            ],
+        )
 
     def _load_concept(
         self,
@@ -32,7 +80,8 @@ class MeddraData:
             os.path.join(self.path, file_name), columns=columns
         ):
             concept_object = concept(**concept_line)
-            self.concepts[concept_object.code] = concept_object
+            if concept_object.code not in self.concepts:
+                self.concepts[concept_object.code] = concept_object
 
 
 class Meddra:
