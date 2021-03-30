@@ -37,6 +37,20 @@ base = meddra.MeddraData(meddra.VERSION_24_0_FR)
 base.load()
 result = base.find("covid", regex=True)
 # `result` is an array of `MeddraConcept`
+
+# A MeddraConcept has a `code`, a `name`, some `parents` and `children`
+# and a concept_type() method that returns concept level in Meddra hierarchy
+# PTs also have `soc` field pointing to the PT's preferred SOC
+# LLTs has no parents but a `pt` field pointing to it's PT
+
+# `find()` method takes a positional argument which is the term to find, that
+# can be either a code or a name. If the `regex` flag is True, only the name
+# of the concepts will be tested and the `term` string will be considered
+# a case-insentitive regular expression.
+
+# A MeddraData object has a `concepts` field which is a dictionnary of all
+# concepts, where keys are meddra identifiers and values are the concept
+# objects.
 ```
 
 # Documentation
